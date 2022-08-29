@@ -1,0 +1,12 @@
+[Unit]
+Description=Storage Notifier Timer
+RefuseManualStart=no
+RefuseManualStop=no
+
+[Timer]
+Persistent=true
+OnCalendar=*:0/5
+Unit=storage_notifier.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Storage Notifier Service
+
+[Service]
+Type=simple
+ExecStart=/path/to/storage_notifier.sh \
+            -n "nodename.mainnet.snapshot" \
+            -b "Storage Notifier" \
+            -w "webhook_url" \
+            -p 20 \
+            -d "/dev/md2"
+
+[Install]
+WantedBy=default.target
