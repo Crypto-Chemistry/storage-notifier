@@ -14,7 +14,7 @@ function send_discord_alert() {
     else
         content="**Alert:** $NODE_NAME - $ext_ip"
     fi
-    json=$(jq -n '
+    json=$(jq --silent -n '
     {
         "username": $username,
         "content": $content,
@@ -59,7 +59,7 @@ function send_discord_alert() {
     --arg disk_percent_left "${disk_percent_left}%" \
     --arg disk_avail "$disk_avail" \
     --arg device "$device" \
-    --arg mount_point "$mount_point")
+    --arg mount_point "$mount_point" 2>/dev/null)
 
     if [[ $LOG == "True" ]]; then
         echo "TODO"
@@ -116,7 +116,7 @@ if [[ ! -z $SPACELEFT_THRESHOLD_INT && ! -z $SPACELEFT_THRESHOLD_PERCENT ]]; the
     printf "Error: Do not select both a space and percentage threshold\n"
     exit 1
 elif [[ ! -z $SPACELEFT_THRESHOLD_INT ]]; then
-    ext_ip=$(curl ifconfig.me)
+    ext_ip=$(curl -s ifconfig.me)
     for device in ${DEVICE[@]}; do
         disk_size=$(df -h | grep "$device" | awk '{print $2}')
         disk_used=$(df -h | grep "$device" | awk '{print $3}')
@@ -128,7 +128,7 @@ elif [[ ! -z $SPACELEFT_THRESHOLD_INT ]]; then
         fi
     done
 elif [[ ! -z $SPACELEFT_THRESHOLD_PERCENT ]]; then
-    ext_ip=$(curl ifconfig.me)
+    ext_ip=$(curl -s ifconfig.me)
     for device in ${DEVICE[@]}; do
         disk_size=$(df -h | grep "$device" | awk '{print $2}')
         disk_used=$(df -h | grep "$device" | awk '{print $3}')
