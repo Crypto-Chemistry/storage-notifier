@@ -5,10 +5,11 @@ Description=Storage Notifier Service
 Type=simple
 ExecStart={{user_dir}}/storage_notifier/storage_notifier.sh \
             -n "{{hostname}}" \
-            -b "Storage Notifier" \
+            -b "{{storage_notifier_bot_name}}" \
             -w "{{discord_webhook}}" \
-            -p {{percent_used}} \
-            -d "{{devices}}"
+            -p "{{percent_used}}" \
+            -d "{{devices}}" \
+            -u "{{discord_uuid}}"
 
 [Install]
 WantedBy=default.target
