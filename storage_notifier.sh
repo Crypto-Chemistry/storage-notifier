@@ -8,6 +8,8 @@ function help_menu() {
 
 function send_discord_alert() {
     if [[ ! -z ${USER_ID} ]]; then
+        #Whitespace here is messed up, but presents the correct notification formatting
+        #TODO: Fix needing to add explicit whitespace/formatting for $content
         content="
 <@${USER_ID}>
 **Alert:** $NODE_NAME - $ext_ip"

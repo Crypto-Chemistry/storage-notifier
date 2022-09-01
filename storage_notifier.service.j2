@@ -1,0 +1,14 @@
+[Unit]
+Description=Storage Notifier Service
+
+[Service]
+Type=simple
+ExecStart={{user_dir}}/storage_notifier/storage_notifier.sh \
+            -n "{{hostname}}" \
+            -b "Storage Notifier" \
+            -w "{{discord_webhook}}" \
+            -p {{percent_used}} \
+            -d "{{devices}}"
+
+[Install]
+WantedBy=default.target
