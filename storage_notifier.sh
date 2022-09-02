@@ -16,7 +16,7 @@ function send_discord_alert() {
     else
         content="**Alert:** $NODE_NAME - $ext_ip"
     fi
-    json=$(jq --silent -n '
+    json=$(jq -n '
     {
         "username": $username,
         "content": $content,
